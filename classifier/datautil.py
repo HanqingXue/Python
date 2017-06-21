@@ -6,6 +6,8 @@ import numpy as np
 import json
 from matplotlib import pyplot as plt
 import os
+import numpy as np
+import random
   
 class DateUtil(object):
     """docstring for DateUtil"""
@@ -13,9 +15,7 @@ class DateUtil(object):
         super(DateUtil, self).__init__()
         self.trainDict = {}
         self.testDict = {}
-        self.disk = os.getcwd()
-        print os.path.join("data")
-        #print self.disk.join('data')
+        self.disk = os.path.join(os.getcwd(), "data")
 
     def parseData(self, datafname, dataLabels):
         #Read train data and package them with JSON
@@ -55,7 +55,9 @@ class DateUtil(object):
         return dataDict
 
     def getTrainData(self):
-        self.trainDict =  self.parseData("train-images.idx3-ubyte", "train-labels.idx1-ubyte")
+        dataPath = os.path.join(self.disk, "train-images.idx3-ubyte")
+        labelPath = os.path.join(self.disk, "train-labels.idx1-ubyte")
+        self.trainDict =  self.parseData(dataPath, labelPath)
         return self.trainDict
 
     def plotImage(self, imgId, imgType):
@@ -74,9 +76,54 @@ class DateUtil(object):
             print "[KeyError] Check the id of image."
 
     def getTestData(self):
-        self.testDict = self.parseData('t10k-images.idx3-ubyte', 't10k-labels.idx1-ubyte')
+        dataPath = os.path.join(self.disk, 't10k-images.idx3-ubyte')
+        labelPath = os.path.join(self.disk, 't10k-labels.idx1-ubyte')
+        self.testDict = self.parseData(dataPath, labelPath)
         return self.testDict
 
-if __name__ == "__main__":
-    util = DateUtil()
+
+    def getTrainMatrix(self, num):
+        self.getTrainData()
+        trainMatrix = []
+        trainLabels = []
+        ids = random.sample(range(0, 60000), num)
+        for Id in ids:
+            trainMatrix.append(self.trainDict[Id]['data'])
+            trainLabels.append(self.trainDict[Id]['label'])
+        self.trainDict['dataMartix'] = np.array(trainMatrix)
+        self.trainDict['labelList'] = np.array(trainLabels)
+        return self.trainDict
     
+    def getTestMatrix(self, num):
+        self.getTestData()
+        testMatrix = []
+        testLabels = []
+        ids = random.sample(range(0, 100434), num)
+        for Id in ids:
+            testMatrix.append(self.testDict[Id]['data'])
+            testLabels.append(self.testDict[Id]['label'])
+        self.testDict['dataMartix'] = np.array(testMatrix)
+        self.testDict['labelList'] = np.array(testLabels)
+        return self.testDict
+
+class descriptData(object):
+    """docstring for descriptData"""
+    def __init__(self):
+        super(descriptData, self).__init__()
+        self.descript = {}
+
+    def getData(self):
+        dataDisk = os.path.join(os.getcwd(), "data")
+        fPath = os.path.join(dataDisk, 'data.txt')
+        f = open(fPath)
+        for item in f.readlines():
+            item = item.replace('\n', '')
+            item = item.split(',')
+            self.descript[int(item[0])] = {}
+            self.descript[int(item[0])]['name'] = item[2]
+            self.descript[int(item[0])]['des'] = item[1]
+        return self.descript
+
+
+
+        
