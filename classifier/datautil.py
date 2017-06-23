@@ -1,14 +1,11 @@
 # -*- coding: utf-8 -*-     
-import struct    
-import matplotlib.pyplot as plt    
-import operator  
-import numpy as np  
-import json
-from matplotlib import pyplot as plt
 import os
-import numpy as np
+import json
+import struct
 import random
-  
+import numpy as np     
+import matplotlib.pyplot as plt    
+
 class DateUtil(object):
     """docstring for DateUtil"""
     def __init__(self):
