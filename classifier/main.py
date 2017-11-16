@@ -212,7 +212,7 @@ class Ui_main(object):
         self.label_14.setText(_translate("main", str(0) + "%", None))
         self.label_15.setText(_translate("main", str(0) + "%", None))
         self.label_13.setText(_translate("main", str(0) + "%", None))
-        self.progressBar.setProperty("value", 0)
+        self.progr14essBar.setProperty("value", 0)
 
     def run(self):
         self.pushButton.setText(_translate("main", "运行中", None))
