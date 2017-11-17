@@ -2,47 +2,13 @@
 <html lang="en">
   <head>
     <meta charset="utf-8">
-    <title>Flat UI Free 101 Template</title>
+    <title>机器学习分类系统</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ static_url('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ static_url('css/flat-ui.min.css') }}"   rel="stylesheet">
+    <link rel="stylesheet" type="text/css" href="{{ static_url('css/index.css') }}">
     <script src="{{ static_url('js/jquery.min.js') }}"></script>
     <script src="{{ static_url('js/flat-ui.min.js') }}"></script>
-    <style type="text/css">
-div.section {
-    border-radius: 0;
-    background-color: #fff;
-    border: 1px solid #efefef;
-    margin-bottom: 20px;
-    overflow: hidden;
-    -webkit-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
-       -moz-box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
-            box-shadow: 0 1px 3px 0 rgba(0, 0, 0, .15);
-}
-div.section div.header {
-    color: #606060;
-    padding: 10px 15px;
-    position: relative;
-}
-div.section div.header h5 {
-    color: #333;
-    margin: 0;
-}
-div.section div.header a {
-    color: #333;
-    position: absolute;
-    right: 15px;
-    top: 12px;
-}
-div.section div.body {
-    border-top: 1px solid #efefef;
-    padding: 15px 15px 0;
-    position: relative;
-}
-body {
-    background: "#A9A9A9"
-}
-    </style>
   </head>
   <body>
     <div id="navigation">
@@ -51,7 +17,7 @@ body {
           <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar-collapse-01">
             <span class="sr-only">Toggle navigation</span>
           </button>
-          <a class="navbar-brand" href="#">机器学习分类系统</a>
+          <a class="navbar-brand" href="#" style="">机器学习分类系统</a>
         </div>
         <div class="collapse navbar-collapse" id="navbar-collapse-01">
           <form class="navbar-form navbar-right" action="#" role="search">
@@ -76,7 +42,13 @@ body {
                     <i class="fa fa-caret-down"></i>
                 </a>
           </div>
-          <div class="body"></div>
+          <div class="body" >
+			<div style="text-align: center">
+				<img src=" {{ static_url('img/config.png') }}" style="text-align: center"></img>
+				<h6>系统已就绪</h6>
+			</div>
+			
+		  </div>
         </div>
       </div>
 
@@ -89,20 +61,48 @@ body {
                 </a>
             </div> <!-- .header -->
             <div class="body">
-                <div class="row-fluid">
-                    <div class="col-md-6 text-bold">车辆总数</div> <!-- .span4 -->
-                    <div class="col-md-6">01</div> <!-- .span8 -->
+                <div class="row-fluid" >
+                    <div class="col-md-6 text-bold"><b>算法名称</b></div> <!-- .span4 -->
+                    <div class="col-md-6" style="margin-bottom: 10px">
+                      <select class="form-control">
+                        <optgroup >
+                          <option>随机森林</option>
+                          <option>SVM</option>
+                          <option>AdaBoost</option>
+                          <option>KNN</option>
+                          <option>朴素贝叶斯</option>
+                          <option>随机梯度下降法</option>
+                          <option>随机森林</option>
+                        </optgroup>
+                      </select>
+                    </div> <!-- .span8 -->
                 </div> <!-- .row-fluid -->
-                <div class="row-fluid">
-                    <div class="col-md-6 text-bold">正常车辆数</div> <!-- .span4 -->
-                    <div class="col-md-6">N/a</div> <!-- .span8 -->
+                <div class="row-fluid" >
+                    <div class="col-md-6 text-bold"><b>训练样本</b></div> <!-- .span4 -->
+                    <div class="col-md-6">
+                      <button class="btn btn-primary col-md-12" style="margin-bottom: 10px">加载训练样本</button>
+                    </div> <!-- .span8 -->
                 </div> <!-- .row-fluid -->
-                <div class="row-fluid">
-                    <div class="col-md-6 text-bold">异常车辆数</div> <!-- .span4 -->
-                    <div class="col-md-6">N/a</div> <!-- .span8 -->
+                <div class="row-fluid" >
+                    <div class="col-md-6 text-bold"><b>测试样本</b></div> <!-- .span4 -->
+                    <div class="col-md-6"> <!-- .span8 -->
+                      <button class="btn btn-primary col-md-12" style="margin-bottom: 10px">加载测试样本</button>
+                    </div>
                 </div> <!-- .row-fluid -->
             </div> <!-- .body -->
         </div> <!-- .section -->
+
+        <div class="section">
+          <div class="header">
+            <h5><i class="fa fa-desktop"></i> 算法简介</h5>
+              <a href="javascript:void(0)">
+                <i class="fa fa-caret-down"></i>
+              </a>
+          </div>
+          <div class="body">
+            <p>随机森林指的是利用多棵树对样本进行训练并预测的一种分类器.</p>
+          </div>
+        </div>
 
         <div id="overview" class="section">
             <div class="header">
@@ -113,23 +113,29 @@ body {
             </div> <!-- .header -->
             <div class="body">
                 <div class="row-fluid">
-                    <div class="col-md-6 text-bold">运行时间</div> <!-- .span4 -->
-                    <div class="col-md-6">01</div> <!-- .span8 -->
+                    <div class="col-md-6 text-bold"><b>运行时间</b></div> <!-- .span4 -->
+                    <div class="col-md-6">
+                      -
+                    </div> <!-- .span8 -->
                 </div> <!-- .row-fluid -->
                 <div class="row-fluid">
-                    <div class="col-md-6 text-bold">总体精度</div> <!-- .span4 -->
-                    <div class="col-md-6">N/a</div> <!-- .span8 -->
+                    <div class="col-md-6 text-bold"><b>总体精度</b></div> <!-- .span4 -->
+                    <div class="col-md-6"><b>-</b></div> <!-- .span8 -->
                 </div> <!-- .row-fluid -->
                 <div class="row-fluid">
-                    <div class="col-md-6 text-bold">总体召回率</div> <!-- .span4 -->
-                    <div class="col-md-6">N/a</div> <!-- .span8 -->
+                    <div class="col-md-6 text-bold"><b>总体召回率</b></div> <!-- .span4 -->
+                    <div class="col-md-6"><b>-</b></div> <!-- .span8 -->
                 </div> <!-- .row-fluid -->
                 <div class="row-fluid">
-                    <div class="col-md-6 text-bold">总体F1-Sorce</div> <!-- .span4 -->
-                    <div class="col-md-6">N/a</div> <!-- .span8 -->
+                    <div class="col-md-6 text-bold"><b>总体F1-Sorce</b></div> <!-- .span4 -->
+                    <div class="col-md-6"><b>-</b></div> <!-- .span8 -->
                 </div> <!-- .row-fluid -->
             </div> <!-- .body -->
         </div> <!-- .section -->
+
+        <button class="btn btn-embossed btn-primary col-md-12">
+          提交
+        </button>
       </div>
     </div>
     <!-- /.container -->
