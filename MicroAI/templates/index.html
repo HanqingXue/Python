@@ -103,7 +103,7 @@
             <p id="algocontent">随机森林指的是利用多棵树对样本进行训练并预测的一种分类器.</p>
           </div>
         </div>
-        <button class="btn btn-embossed btn-primary col-md-12">
+        <button class="btn btn-embossed btn-primary col-md-12" id="submit">
           提交
         </button>
       </div>
@@ -152,6 +152,12 @@
             </div>
         </div><!-- /.modal-content -->
     </div><!-- /.modal -->
+
+    <form action="/res" method="post" id="dataform">
+      <input type="text" class="form-control" name="algorithms">
+      <input type="text" class="form-control" name="trainSample">
+      <input type="text" class="form-control" name="trainLabel">
+    </form>
 </div>
   </body>
   <script type="text/javascript">
@@ -179,6 +185,12 @@
         console.log(curAlgo);
         $('#algocontent').text(algorithms[curAlgo]);
       });
+    });
+  </script>
+  <script type="text/javascript">
+    $('#submit').click(function() {
+      console.log("hello");
+      $('#dataform').submit();
     });
   </script>
 </html>
