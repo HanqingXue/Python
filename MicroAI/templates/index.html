@@ -80,13 +80,13 @@
                 <div class="row-fluid" >
                     <div class="col-md-6 text-bold"><b>训练样本</b></div> <!-- .span4 -->
                     <div class="col-md-6">
-                      <button class="btn btn-primary col-md-12" style="margin-bottom: 10px">加载训练样本</button>
+                      <button class="btn btn-primary col-md-12" style="margin-bottom: 10px" data-toggle="modal" data-target="#trainSample">加载训练样本</button>
                     </div> <!-- .span8 -->
                 </div> <!-- .row-fluid -->
                 <div class="row-fluid" >
                     <div class="col-md-6 text-bold"><b>测试样本</b></div> <!-- .span4 -->
                     <div class="col-md-6"> <!-- .span8 -->
-                      <button class="btn btn-primary col-md-12" style="margin-bottom: 10px">加载测试样本</button>
+                      <button class="btn btn-primary col-md-12" style="margin-bottom: 10px" data-toggle="modal" data-target="#testSample">加载测试样本</button>
                     </div>
                 </div> <!-- .row-fluid -->
             </div> <!-- .body -->
@@ -107,8 +107,52 @@
           提交
         </button>
       </div>
-    </div>
+      <div class="modal fade" id="trainSample" tabindex="0" role="dialog" aria-labelledby="trainSampleLabel" aria-hidden="true">
+        <div class="modal-dialog">
+          <div class="modal-content">
+            <div class="modal-header">
+              <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+                &times;
+              </button>
+              <h4 class="modal-title" id="trainSampleLabel">
+                训练样本
+              </h4>
+            </div>
+            <div class="modal-body">
+                <textarea class="form-control flat col-md-6" placeholder="请键入样本（注：每行是一个样本，以逗号分隔不允许有空行）" style="margin-bottom: 10px">
+                </textarea>
+                <textarea class="form-control flat col-md-6" placeholder="请键入标签（注：每行是一个标签）" style="margin-bottom: 10px">
+                </textarea>
+            </div>
+            <div class="modal-footer">
+              <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+              </button>
+              <button type="button" class="btn btn-primary">
+                确认
+              </button>
+            </div>
+          </div><!-- /.modal-content -->
+        </div><!-- /.modal -->
+      </div>
     <!-- /.container -->
+    <div class="modal fade" id="testSample" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                <h4 class="modal-title" id="myModalLabel">测试样本</h4>
+            </div>
+            <div class="modal-body">
+              <textarea class="form-control flat" placeholder="请键入样本（注：每行是一个样本，以逗号分隔不允许有空行）">  
+              </textarea>
+             </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
+                <button type="button" class="btn btn-primary">确认</button>
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal -->
+</div>
   </body>
   <script type="text/javascript">
     var algorithms = {
