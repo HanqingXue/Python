@@ -7,11 +7,9 @@ class ResultHandler(tornado.web.RequestHandler):
 		algorithm = self.get_argument('algorithms')
 		trainSample = self.get_argument('trainSample')
 		trainLabel = self.get_argument('trainLabel')
-		#testSample 
-		if len(trainSample)  == 0 or  len(trainLabel) == 0:
-			self.render("error.html")
+		testSample = self.get_argument('testSample')
 
-		print algorithm
-		print trainSample
-		print trainLabel
-		self.render('result.html', algo = algorithm)
+		if len(trainSample)  == 0 or  len(trainLabel) == 0 or len(testSample) == 0:
+			self.render("error.html")
+		else :
+			self.render('result.html', algo = algorithm)

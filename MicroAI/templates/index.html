@@ -100,7 +100,7 @@
               </a>
           </div>
           <div class="body">
-            <p id="algocontent">随机森林指的是利用多棵树对样本进行训练并预测的一种分类器.</p>
+            <p id="algocontent">决策树算法是一种逼近离散函数值的方法。它是一种典型的分类方法，首先对数据进行处理，利用归纳算法生成可读的规则和决策树，然后使用决策对新数据进行分析。本质上决策树是通过一系列规则对数据进行分类的过程。</p>
           </div>
         </div>
         <button class="btn btn-embossed btn-primary col-md-12" id="submit">
@@ -156,9 +156,9 @@
 
     <form action="/res" method="post" id="dataform">
       <input type="text" class="form-control hiddenInput" name="algorithms" id="algoinput" style="display: none">
-      <input type="text" class="form-control hiddenInput" name="trainSample" id="trainSample" style="display: none">
-      <input type="text" class="form-control hiddenInput" name="trainLabel" style="display: none">
-      <input type="text" class="form-control hiddenInput" name="testSample" style="display: none">
+      <input type="text" class="form-control hiddenInput" name="trainSample" id="trainSampleInput" style="display: none">
+      <input type="text" class="form-control hiddenInput" name="trainLabel" style="display: none" id="trainLabelInput">
+      <input type="text" class="form-control hiddenInput" name="testSample" style="display: none" id="testSampleInput">
     </form>
 </body>
   <script type="text/javascript">
@@ -194,6 +194,9 @@
       var testlbl = $('#testlbl').val();
 
       $('#algoinput').attr("value", algorithm);
+      $('#trainSampleInput').attr("value", trainSample);
+      $('#trainLabelInput').attr("value", trainlbl);
+      $('#testSampleInput').attr("value", testlbl);
       $('#dataform').submit();
     });
   </script>
