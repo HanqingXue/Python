@@ -13,8 +13,11 @@ def is_vaild(input_value):
 
 	return True
 
-def is_num_match(train_data):
-	pass 
+def is_num_match(data, label, dim):
+	data = data.split(',')
+	label = label.split(',')
 
-
-
+	if len(data) / len(label) == dim:
+		return True
+	
+	return False

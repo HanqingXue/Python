@@ -7,10 +7,8 @@
     <link href="{{ static_url('css/bootstrap.min.css') }}" rel="stylesheet">
     <link href="{{ static_url('css/flat-ui.min.css') }}"   rel="stylesheet">
     <link rel="stylesheet" type="text/css" href="{{ static_url('css/index.css') }}">
-    <link rel="stylesheet" type="text/css" href="{{ static_url('css/handsontable.full.css') }}" >
     <script src="{{ static_url('js/jquery.min.js') }}"></script>
     <script src="{{ static_url('js/flat-ui.min.js') }}"></script>
-    <script type="text/javascript" src="{{ static_url('js/handsontable.full.js') }}"></script>
   </head>
   <body>
     <div id="navigation">
@@ -160,6 +158,7 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal -->
     </div>
+
     <div class="modal fade" id="trainSamples" tabindex="0" role="dialog" aria-labelledby="trianModalLabel" aria-hidden="true">
       <div class="modal-dialog">
         <div class="modal-content">
@@ -170,8 +169,6 @@
             <div class="modal-body">
               <textarea class="form-control flat col-md-8" placeholder="请键入样本（注：每行是一个样本，以逗号分隔不允许有空行）" id="testlbl">  
               </textarea>
-              <!--<textarea class="form-control flat col-md-6" placeholder="请键入标签（注：每行是一个标签）" style="margin-bottom: 10px" id="trainlbl">
-              </textarea>-->
              </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-default" data-dismiss="modal">关闭</button>
@@ -179,8 +176,6 @@
         </div><!-- /.modal-content -->
       </div><!-- /.modal -->
     </div>
-    
-
 
     <form action="/res" method="post" id="dataform">
       <input type="text" class="form-control hiddenInput" name="algorithms" id="algoinput" style="display: none">
@@ -220,6 +215,8 @@
       var trainSampleArray = trainSample.split("\n").toString();
       var trainlblArray = trainlbl.split("\n").toString();
       var testlblArray = testlbl.split("\n").toString();
+
+      console.log(trainSample.split("\n"));
       
       if(trainlblArray != '' && trainlblArray != '' && testlblArray != '') {
         var data  = {}
@@ -227,6 +224,7 @@
         data['trainLabel'] = trainlblArray;
         data['testData'] = testlblArray;
         data['algorithms'] = algorithm;
+        data['dim'] = trainSample.split("\n")[1];
 
         $('#algoinput').attr("value", algorithm);
         $('#trainSampleInput').attr("value", JSON.stringify(data));
@@ -241,10 +239,6 @@
     $('#testbtn').click(function() {
       var trainSample = $('#triansamp').val();
       var arry = trainSample.split("\n");
-      console.log(arry);
-      console.log(typeof(arry[1]));
-      console.log(arry.toString());
-    
     });
   </script>
 </html>
