@@ -44,15 +44,15 @@
                 </a>
           </div>
           <div class="body" >
-			       <div style="text-align: center">
+             <div style="text-align: center">
               <div id="main" style="width: 100%; height: 500%"></div>
-			       </div>
-		      </div>
+             </div>
+          </div>
         </div>
       </div>
 
       <div class="col-md-4">
-		    <div id="overview" class="section">
+        <div id="overview" class="section">
                 <div class="header">
                     <h5><i class="fa fa-desktop"></i> 实验结果</h5>
                     <a href="javascript:void(0)">
@@ -62,21 +62,21 @@
                 <div class="body">
                     <div class="row-fluid">
                         <div class="col-md-6 text-bold"><b>运行时间</b></div> <!-- .span4 -->
-                        <div class="col-md-6">
+                        <div class="col-md-6" id="time">
                           0<b>S</b>
                         </div> <!-- .span8 -->
                     </div> <!-- .row-fluid -->
-                    <div class="row-fluid">
+                    <div class="row-fluid" ">
                         <div class="col-md-6 text-bold"><b>总体精度</b></div> <!-- .span4 -->
-                        <div class="col-md-6">0<b>%</b></div> <!-- .span8 -->
+                        <div class="col-md-6" id="precision"><b>%</b></div> <!-- .span8 -->
                     </div> <!-- .row-fluid -->
                     <div class="row-fluid">
                         <div class="col-md-6 text-bold"><b>总体召回率</b></div> <!-- .span4 -->
-                        <div class="col-md-6">0<b>%</b></div> <!-- .span8 -->
+                        <div class="col-md-6" id="recall">0<b>%</b></div> <!-- .span8 -->
                     </div> <!-- .row-fluid -->
                     <div class="row-fluid">
                         <div class="col-md-6 text-bold"><b>总体F1-Sorce</b></div> <!-- .span4 -->
-                        <div class="col-md-6">0<b>%</b></div> <!-- .span8 -->
+                        <div class="col-md-6" id="fscore">0<b>%</b></div> <!-- .span8 -->
                     </div> <!-- .row-fluid -->
                 </div> <!-- .body -->
             </div> <!-- .section -->
@@ -96,39 +96,45 @@
         <button class="btn btn-embossed btn-primary col-md-12" id="submit">
          <a href="/">返回</a>
         </button>
+
+        <div id = 'result' style="display: none;">{{ result }}</div>
       </div>
 </div>
   </body>
   <script type="text/javascript">
     var algorithms = {
       'DT': "决策树算法是一种逼近离散函数值的方法。它是一种典型的分类方法，首先对数据进行处理，利用归纳算法生成可读的规则和决策树，然后使用决策对新数据进行分析。本质上决策树是通过一系列规则对数据进行分类的过程。",
-
       'SVM': "支持向量机是CorinnaCortes和Vapnik等于1995年首先提出的，它在解决小样本、非线性及高维模式识别中表现出许多特有的优势，并能够推广应用到函数拟合等其他机器学习问题中。",
-
       "AdaBoost": "Adaboost是一种迭代算法，其核心思想是针对同一个训练集训练不同的分类器(弱分类器)，然后把这些弱分类器集合起来，构成一个更强的最终分类器（强分类器）。",
-
       "KNN": "邻近算法，或者说K最近邻(kNN，k-NearestNeighbor)分类算法是数据挖掘分类技术中最简单的方法之一。所谓K最近邻，就是k个最近的邻居的意思，说的是每个样本都可以用它最接近的k个邻居来代表。",
-
       "SGD": "梯度下降法是一个一阶最优化算法，通常也称为最速下降法。要使用梯度下降法找到一个函数的局部极小值，必须向函数上当前点对应梯度（或者是近似梯度）的反方向的规定步长距离点进行迭代搜索。如果相反地向梯度正方向迭代进行搜索，则会接近函数的局部极大值点；这个过程则被称为梯度上升法",
-
       "RF": "随机森林指的是利用多棵树对样本进行训练并预测的一种分类器",
-
       "NBM": "贝叶斯分类是一类分类算法的总称，这类算法均以贝叶斯定理为基础，故统称为贝叶斯分类"
     }
   </script>
   <script type="text/javascript">
     var algokey = "{{ algo }}";
+    var result = "{{ result }}";
   </script>
   <script type="text/javascript">
     $(document).ready(function(){
         var curAlgo = $(this).find("option:selected").val();
         $('#algocontent').text(algorithms[algokey]);
+
+        var result = JSON.parse($('#result').text());
+        $('#time').text(result['time'] + 'S');
+        $('#precision').text(result['precision'] + "%");
+        $('#recall').text(result['recall'] + "%");
+        $('#fscore').text(result['fscore']);
+
+        visionData(result);
     });
   </script>
   <script type="text/javascript">
-    $(function() {
+    function visionData(result) {
       var vContainer = echarts.init(document.getElementById('main'));
-        var option = {
+      
+      var option = {
             tooltip : {
                 trigger: 'axis',
                 showDelay : 0,
@@ -142,7 +148,7 @@
                 }
             },
             legend: {
-                data:[ 'sin','cos']
+                data: result['legend']
             },
             toolbox: {
                 show : true,
@@ -168,7 +174,7 @@
             ],
             series : [
                 {
-                    name:'sin',
+                    name:'1',
                     type:'scatter',
                     large: true,
                     data:   [
@@ -176,11 +182,10 @@
                         [1, 1],
                         [0, 1],
                         [2, 3]
-
                     ]
                 },
                 {
-                    name:'cos',
+                    name:'2',
                     type:'scatter',
                     large: true,
                     data: [
@@ -191,8 +196,7 @@
                 }
             ]
         };
-        vContainer.setOption(option); 
-    });
+        vContainer.setOption(option);
+    }
   </script>
 </html>
-

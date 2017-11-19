@@ -2,8 +2,10 @@
 import sys 
 reload(sys)
 sys.setdefaultencoding('utf-8')
-import json 
+import json
+
 import tornado.web
+import tornado.escape
 
 from methods.inputcheck import is_vaild
 from methods.str2matrix import *
@@ -27,11 +29,17 @@ class ResultHandler(tornado.web.RequestHandler):
 			train_matrix = str2matrix(result['trainData'], dim)
 			train_label = str2list(result['trainLabel'])
 			test_matrix = str2matrix(result['testData'], dim)
+		
+			result = {
+				'legend': ['1', '2'],
+				'time': 3,
+				'recall': 90,
+				'precision': 88,
+				'fscore': 0.9
+			}
 
-			print train_matrix
-			print test_matrix
-			print train_label
-			self.render('result.html', algo = algorithm)
+			data = json.dumps(result)
+			self.render('result.html', algo = algorithm, result = data)
 		else:
 			self.render("error.html")
 			
