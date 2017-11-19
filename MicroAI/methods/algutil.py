@@ -35,6 +35,9 @@ class algutil(object):
     
     def classify(self, classifierName, trainData, testData):
         classifier = self.algorithm[classifierName] 
+
+
+        '''
         classifier.fit(trainData["dataMartix"], trainData["labelList"])
         predictions = classifier.predict(testData["dataMartix"])
         
@@ -58,5 +61,6 @@ class algutil(object):
             resultDict[cls]['recall'] = recall
             resultDict[cls]['fscore'] = fscore
             resultDict[cls]['support'] = support
-
+        
         return resultDict
+        '''

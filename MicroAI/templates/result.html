@@ -9,6 +9,7 @@
     <link rel="stylesheet" type="text/css" href="{{ static_url('css/index.css') }}">
     <script src="{{ static_url('js/jquery.min.js') }}"></script>
     <script src="{{ static_url('js/flat-ui.min.js') }}"></script>
+    <script src="{{ static_url('js/echarts.min.js') }}"></script>
   </head>
   <body>
     <div id="navigation">
@@ -43,56 +44,54 @@
                 </a>
           </div>
           <div class="body" >
-			<div style="text-align: center">
-				<img src=" {{ static_url('img/config.png') }}" style="text-align: center"></img>
-				<h6>系统已就绪</h6>
-			</div>
-			
-		  </div>
+			       <div style="text-align: center">
+              <div id="main" style="width: 100%; height: 500%"></div>
+			       </div>
+		      </div>
         </div>
       </div>
 
       <div class="col-md-4">
-		<div id="overview" class="section">
-            <div class="header">
-                <h5><i class="fa fa-desktop"></i> 实验结果</h5>
-                <a href="javascript:void(0)">
-                    <i class="fa fa-caret-down"></i>
-                </a>
-            </div> <!-- .header -->
-            <div class="body">
-                <div class="row-fluid">
-                    <div class="col-md-6 text-bold"><b>运行时间</b></div> <!-- .span4 -->
-                    <div class="col-md-6">
-                      0<b>S</b>
-                    </div> <!-- .span8 -->
-                </div> <!-- .row-fluid -->
-                <div class="row-fluid">
-                    <div class="col-md-6 text-bold"><b>总体精度</b></div> <!-- .span4 -->
-                    <div class="col-md-6">0<b>%</b></div> <!-- .span8 -->
-                </div> <!-- .row-fluid -->
-                <div class="row-fluid">
-                    <div class="col-md-6 text-bold"><b>总体召回率</b></div> <!-- .span4 -->
-                    <div class="col-md-6">0<b>%</b></div> <!-- .span8 -->
-                </div> <!-- .row-fluid -->
-                <div class="row-fluid">
-                    <div class="col-md-6 text-bold"><b>总体F1-Sorce</b></div> <!-- .span4 -->
-                    <div class="col-md-6">0<b>%</b></div> <!-- .span8 -->
-                </div> <!-- .row-fluid -->
-            </div> <!-- .body -->
-        </div> <!-- .section -->
+		    <div id="overview" class="section">
+                <div class="header">
+                    <h5><i class="fa fa-desktop"></i> 实验结果</h5>
+                    <a href="javascript:void(0)">
+                        <i class="fa fa-caret-down"></i>
+                    </a>
+                </div> <!-- .header -->
+                <div class="body">
+                    <div class="row-fluid">
+                        <div class="col-md-6 text-bold"><b>运行时间</b></div> <!-- .span4 -->
+                        <div class="col-md-6">
+                          0<b>S</b>
+                        </div> <!-- .span8 -->
+                    </div> <!-- .row-fluid -->
+                    <div class="row-fluid">
+                        <div class="col-md-6 text-bold"><b>总体精度</b></div> <!-- .span4 -->
+                        <div class="col-md-6">0<b>%</b></div> <!-- .span8 -->
+                    </div> <!-- .row-fluid -->
+                    <div class="row-fluid">
+                        <div class="col-md-6 text-bold"><b>总体召回率</b></div> <!-- .span4 -->
+                        <div class="col-md-6">0<b>%</b></div> <!-- .span8 -->
+                    </div> <!-- .row-fluid -->
+                    <div class="row-fluid">
+                        <div class="col-md-6 text-bold"><b>总体F1-Sorce</b></div> <!-- .span4 -->
+                        <div class="col-md-6">0<b>%</b></div> <!-- .span8 -->
+                    </div> <!-- .row-fluid -->
+                </div> <!-- .body -->
+            </div> <!-- .section -->
 
-        <div class="section">
-          <div class="header">
-            <h5><i class="fa fa-desktop"></i> 算法简介</h5>
-              <a href="javascript:void(0)">
-                <i class="fa fa-caret-down"></i>
-              </a>
-          </div>
-          <div class="body">
-            <p id="algocontent">随机森林指的是利用多棵树对样本进行训练并预测的一种分类器.</p>
-          </div>
-        </div>
+            <div class="section">
+              <div class="header">
+                <h5><i class="fa fa-desktop"></i> 算法简介</h5>
+                  <a href="javascript:void(0)">
+                    <i class="fa fa-caret-down"></i>
+                  </a>
+              </div>
+              <div class="body">
+                <p id="algocontent">随机森林指的是利用多棵树对样本进行训练并预测的一种分类器.</p>
+              </div>
+            </div><!--.section-->
 
         <button class="btn btn-embossed btn-primary col-md-12" id="submit">
          <a href="/">返回</a>
@@ -124,6 +123,75 @@
     $(document).ready(function(){
         var curAlgo = $(this).find("option:selected").val();
         $('#algocontent').text(algorithms[algokey]);
+    });
+  </script>
+  <script type="text/javascript">
+    $(function() {
+      var vContainer = echarts.init(document.getElementById('main'));
+        var option = {
+            tooltip : {
+                trigger: 'axis',
+                showDelay : 0,
+                axisPointer:{
+                    show: true,
+                    type : 'cross',
+                    lineStyle: {
+                        type : 'dashed',
+                        width : 1
+                    }
+                }
+            },
+            legend: {
+                data:[ 'sin','cos']
+            },
+            toolbox: {
+                show : true,
+                feature : {
+                    mark : {show: true},
+                    dataZoom : {show: true},
+                    dataView : {show: true, readOnly: false},
+                    restore : {show: true},
+                    saveAsImage : {show: true}
+                }
+            },
+            xAxis : [
+                {
+                    type : 'value',
+                    scale:true
+                }
+            ],
+            yAxis : [
+                {
+                    type : 'value',
+                    scale:true
+                }
+            ],
+            series : [
+                {
+                    name:'sin',
+                    type:'scatter',
+                    large: true,
+                    data:   [
+                        [0, 0],
+                        [1, 1],
+                        [0, 1],
+                        [2, 3]
+
+                    ]
+                },
+                {
+                    name:'cos',
+                    type:'scatter',
+                    large: true,
+                    data: [
+                      [9,9],
+                      [8,7],
+                      [7,8]
+                    ]
+                }
+            ]
+        };
+        vContainer.setOption(option); 
     });
   </script>
 </html>
