@@ -104,15 +104,26 @@
           </div><!--.header-->
           <div class="body" >
             <div id="sample"  style="width: 120%; height: 200%"></div>
-          </div>
           </div><!--body-->
-
-          <button class="btn btn-embossed btn-primary col-md-12" id="submit">
-             <a href="/">返回</a>
-          </button>
         </div><!--.section-->
-        <div id = 'result' style="display: none;">{{ result }}</div>
+
+        <div class="section">
+          <div class="header">
+             <h5><i class="fa fa-desktop"></i>样本数量统计</h5>
+            <a href="javascript:void(0)">
+              <i class="fa fa-caret-down"></i>
+            </a>
+          </div><!--.header-->
+          <div class="body" >
+            <div id="count"  style="width: 100%; height: 200%"></div>
+          </div><!--body-->
+        </div><!--.section-->
+
+        <button class="btn btn-embossed btn-primary col-md-12" id="submit">
+            <a href="/">返回</a>
+        </button>
       </div><!--.col-md-3-->
+      <div id = 'result' style="display: none;">{{ result }}</div>
     </div>
   </body>
   <script type="text/javascript">
@@ -143,6 +154,7 @@
 
         visionData(result);
         samplePie();
+        countSample();
     });
   </script>
   <script type="text/javascript">
@@ -249,6 +261,48 @@
                       {value:679, name:'营销广告'},
                       {value:1548, name:'搜索引擎'}
                   ]
+              }
+          ]
+      };
+      vContainer.setOption(option);
+    }
+  </script>
+  <script type="text/javascript">
+    function countSample() {
+      var vContainer = echarts.init(document.getElementById('count'));
+      var option = {
+          color: ['#3398DB'],
+          tooltip : {
+              trigger: 'axis',
+              axisPointer : {            // 坐标轴指示器，坐标轴触发有效
+                  type : 'shadow'        // 默认为直线，可选为：'line' | 'shadow'
+              }
+          },
+          grid: {
+              left: '3%',
+              right: '4%',
+              bottom: '3%',
+              containLabel: true
+          },
+          xAxis : [
+              {
+                  type : 'category',
+                  data : ['训练样本', '测试样本'],
+                  axisTick: {
+                      alignWithLabel: true
+                  }
+              }
+          ],
+          yAxis : [
+              {
+                  type : 'value'
+              }
+          ],
+          series : [
+              {
+                  type:'bar',
+                  barWidth: '60%',
+                  data:[10, 52]
               }
           ]
       };
