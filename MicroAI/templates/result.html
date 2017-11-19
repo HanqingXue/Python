@@ -97,12 +97,14 @@
       <div class="col-md-3">
         <div class="section">
           <div class="header">
-             <h5><i class="fa fa-desktop"></i>数据分布</h5>
+             <h5><i class="fa fa-desktop"></i>训练样本分布</h5>
             <a href="javascript:void(0)">
               <i class="fa fa-caret-down"></i>
             </a>
           </div><!--.header-->
-          <div class="body" id="sample"></div>
+          <div class="body" >
+            <div id="sample"  style="width: 120%; height: 200%"></div>
+          </div>
           </div><!--body-->
 
           <button class="btn btn-embossed btn-primary col-md-12" id="submit">
@@ -140,6 +142,7 @@
         $('#fscore').text(result['fscore']);
 
         visionData(result);
+        samplePie();
     });
   </script>
   <script type="text/javascript">
@@ -212,6 +215,44 @@
     }
   </script>
   <script type="text/javascript">
-    function sample()
+    function samplePie() {
+      var vContainer = echarts.init(document.getElementById('sample'));
+
+      var option = {
+          tooltip: {
+              trigger: 'item',
+              formatter: "{a} <br/>{b}: {c} ({d}%)"
+          },
+          legend: {
+              orient: 'vertical',
+              x: 'left',
+              data:['直达','营销广告','搜索引擎','邮件营销','联盟广告','视频广告','百度','谷歌','必应','其他']
+          },
+          series: [
+              {
+                  type:'pie',
+                  selectedMode: 'single',
+                  radius: [0, '90%'],     
+
+                  label: {
+                      normal: {
+                          position: 'inner'
+                      }
+                  },
+                  labelLine: {
+                      normal: {
+                          show: false
+                      }
+                  },
+                  data:[
+                      {value:335, name:'直达'},
+                      {value:679, name:'营销广告'},
+                      {value:1548, name:'搜索引擎'}
+                  ]
+              }
+          ]
+      };
+      vContainer.setOption(option);
+    }
   </script>
 </html>
