@@ -33,9 +33,52 @@
           </form>
         </div>
       </nav>
-    </div>
+    </div><!--navigation-->
     <div class="container">
-      <div class="col-md-8">
+      <div class="col-md-3">
+        <div class="section">
+          <div class="header">
+            <h5><i class="fa fa-desktop"></i> 算法简介</h5>
+              <a href="javascript:void(0)">
+                <i class="fa fa-caret-down"></i>
+              </a>
+          </div>
+          <div class="body">
+            <p id="algocontent">随机森林指的是利用多棵树对样本进行训练并预测的一种分类器.</p>
+          </div>
+        </div><!--.section-->
+
+        <div id="overview" class="section">
+          <div class="header">
+              <h5><i class="fa fa-desktop"></i> 实验结果</h5>
+              <a href="javascript:void(0)">
+                  <i class="fa fa-caret-down"></i>
+              </a>
+          </div> <!-- .header -->
+          <div class="body">
+              <div class="row-fluid">
+                  <div class="col-md-8 text-bold"><b>运行时间</b></div> <!-- .span4 -->
+                  <div class="col-md-4" id="time">
+                    0<b>S</b>
+                  </div> <!-- .span8 -->
+              </div> <!-- .row-fluid -->
+              <div class="row-fluid" ">
+                  <div class="col-md-8 text-bold"><b>总体精度</b></div> <!-- .span4 -->
+                  <div class="col-md-4" id="precision"><b>%</b></div> <!-- .span8 -->
+              </div> <!-- .row-fluid -->
+              <div class="row-fluid">
+                  <div class="col-md-8 text-bold"><b>总体召回率</b></div> <!-- .span4 -->
+                  <div class="col-md-4" id="recall">0<b>%</b></div> <!-- .span8 -->
+              </div> <!-- .row-fluid -->
+              <div class="row-fluid">
+                  <div class="col-md-8 text-bold"><b>总体F1-Sorce</b></div> <!-- .span4 -->
+                  <div class="col-md-4" id="fscore">0<b>%</b></div> <!-- .span8 -->
+              </div> <!-- .row-fluid -->
+          </div> <!-- .body -->
+        </div> <!-- .section -->
+      </div><!--.col-md-3-->
+
+      <div class="col-md-6">
         <div class="section">
           <div class="header">
             <h5><i class="fa fa-desktop"></i> 实验结果可视化</h5>
@@ -49,57 +92,26 @@
              </div>
           </div>
         </div>
-      </div>
+      </div><!--col-md-6-->
 
-      <div class="col-md-4">
-        <div id="overview" class="section">
-                <div class="header">
-                    <h5><i class="fa fa-desktop"></i> 实验结果</h5>
-                    <a href="javascript:void(0)">
-                        <i class="fa fa-caret-down"></i>
-                    </a>
-                </div> <!-- .header -->
-                <div class="body">
-                    <div class="row-fluid">
-                        <div class="col-md-6 text-bold"><b>运行时间</b></div> <!-- .span4 -->
-                        <div class="col-md-6" id="time">
-                          0<b>S</b>
-                        </div> <!-- .span8 -->
-                    </div> <!-- .row-fluid -->
-                    <div class="row-fluid" ">
-                        <div class="col-md-6 text-bold"><b>总体精度</b></div> <!-- .span4 -->
-                        <div class="col-md-6" id="precision"><b>%</b></div> <!-- .span8 -->
-                    </div> <!-- .row-fluid -->
-                    <div class="row-fluid">
-                        <div class="col-md-6 text-bold"><b>总体召回率</b></div> <!-- .span4 -->
-                        <div class="col-md-6" id="recall">0<b>%</b></div> <!-- .span8 -->
-                    </div> <!-- .row-fluid -->
-                    <div class="row-fluid">
-                        <div class="col-md-6 text-bold"><b>总体F1-Sorce</b></div> <!-- .span4 -->
-                        <div class="col-md-6" id="fscore">0<b>%</b></div> <!-- .span8 -->
-                    </div> <!-- .row-fluid -->
-                </div> <!-- .body -->
-            </div> <!-- .section -->
+      <div class="col-md-3">
+        <div class="section">
+          <div class="header">
+             <h5><i class="fa fa-desktop"></i>数据分布</h5>
+            <a href="javascript:void(0)">
+              <i class="fa fa-caret-down"></i>
+            </a>
+          </div><!--.header-->
+          <div class="body" id="sample"></div>
+          </div><!--body-->
 
-            <div class="section">
-              <div class="header">
-                <h5><i class="fa fa-desktop"></i> 算法简介</h5>
-                  <a href="javascript:void(0)">
-                    <i class="fa fa-caret-down"></i>
-                  </a>
-              </div>
-              <div class="body">
-                <p id="algocontent">随机森林指的是利用多棵树对样本进行训练并预测的一种分类器.</p>
-              </div>
-            </div><!--.section-->
-
-        <button class="btn btn-embossed btn-primary col-md-12" id="submit">
-         <a href="/">返回</a>
-        </button>
-
+          <button class="btn btn-embossed btn-primary col-md-12" id="submit">
+             <a href="/">返回</a>
+          </button>
+        </div><!--.section-->
         <div id = 'result' style="display: none;">{{ result }}</div>
-      </div>
-</div>
+      </div><!--.col-md-3-->
+    </div>
   </body>
   <script type="text/javascript">
     var algorithms = {
@@ -198,5 +210,8 @@
         };
         vContainer.setOption(option);
     }
+  </script>
+  <script type="text/javascript">
+    function sample()
   </script>
 </html>
