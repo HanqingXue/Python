@@ -152,9 +152,10 @@
         $('#recall').text(result['recall'] + "%");
         $('#fscore').text(result['fscore']);
 
+
         visionData(result);
         samplePie();
-        countSample();
+        countSample(result['smpcnt']);
     });
   </script>
   <script type="text/javascript">
@@ -268,7 +269,7 @@
     }
   </script>
   <script type="text/javascript">
-    function countSample() {
+    function countSample(smpCount) {
       var vContainer = echarts.init(document.getElementById('count'));
       var option = {
           color: ['#3398DB'],
@@ -302,7 +303,7 @@
               {
                   type:'bar',
                   barWidth: '60%',
-                  data:[10, 52]
+                  data: smpCount
               }
           ]
       };

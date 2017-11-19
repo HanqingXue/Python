@@ -30,12 +30,14 @@ class ResultHandler(tornado.web.RequestHandler):
 			train_label = str2list(result['trainLabel'])
 			test_matrix = str2matrix(result['testData'], dim)
 		
+			smpcnt = [train_matrix.shape[0], test_matrix.shape[0]]
 			result = {
 				'legend': ['1', '2'],
 				'time': 3,
 				'recall': 90,
 				'precision': 88,
-				'fscore': 0.9
+				'fscore': 0.9,
+				'smpcnt': smpcnt
 			}
 
 			data = json.dumps(result)
