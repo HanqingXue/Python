@@ -9,6 +9,7 @@ import tornado.escape
 
 from methods.inputcheck import is_vaild
 from methods.str2matrix import *
+from methods.datatuiils import *
 
 class ResultHandler(tornado.web.RequestHandler):
 	def post(self):
@@ -29,7 +30,8 @@ class ResultHandler(tornado.web.RequestHandler):
 			train_matrix = str2matrix(result['trainData'], dim)
 			train_label = str2list(result['trainLabel'])
 			test_matrix = str2matrix(result['testData'], dim)
-		
+			
+			print cnt_train_sample_size(train_label_list)
 			smpcnt = [train_matrix.shape[0], test_matrix.shape[0]]
 			result = {
 				'legend': ['1', '2'],
