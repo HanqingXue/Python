@@ -31,7 +31,6 @@ class ResultHandler(tornado.web.RequestHandler):
 			train_label = str2list(result['trainLabel'])
 			test_matrix = str2matrix(result['testData'], dim)
 			
-			print cnt_train_sample_size(train_label_list)
 			smpcnt = [train_matrix.shape[0], test_matrix.shape[0]]
 			result = {
 				'legend': ['1', '2'],
@@ -39,7 +38,8 @@ class ResultHandler(tornado.web.RequestHandler):
 				'recall': 90,
 				'precision': 88,
 				'fscore': 0.9,
-				'smpcnt': smpcnt
+				'smpcnt': smpcnt,
+				'labelinfo': cnt_train_sample_size(train_label_list)
 			}
 
 			data = json.dumps(result)
