@@ -7,9 +7,8 @@ import json
 import tornado.web
 import tornado.escape
 
-from methods.inputcheck import is_vaild
-from methods.str2matrix import *
-from methods.datatuiils import *
+from methods.datahelper import *
+from methods.algohelper import *
 
 class ResultHandler(tornado.web.RequestHandler):
 	def post(self):
@@ -17,7 +16,7 @@ class ResultHandler(tornado.web.RequestHandler):
 		trainSample = self.get_argument('trainSample')
 
 		result = json.loads(trainSample)
-		print result
+		
 		train_data_status = is_vaild(result['trainData'])
 		test_data_status = is_vaild(result['testData'])
 		train_label_status = is_vaild(result['trainLabel'])
@@ -28,16 +27,19 @@ class ResultHandler(tornado.web.RequestHandler):
 
 			dim = len(train_data_list) / len(train_label_list) 
 			train_matrix = str2matrix(result['trainData'], dim)
+			test_matrix = str2matrix(result['testData'], dim)
 			train_label = str2list(result['trainLabel'])
 			
-
 			series = format_test_series([list(item) for item in train_matrix], [item[0] for item in train_label])
-			print [list(item) for item in train_matrix]
-			test_matrix = str2matrix(result['testData'], dim)
 			
+			labels =  set([label[0] for label in train_label])
+			legend = [ str(lbl) for lbl in list(labels)]
+
+			algo = algohelper()
+			#print algo.classify(algorithm, train_matrix, train_label, test_matrix)
 			smpcnt = [train_matrix.shape[0], test_matrix.shape[0]]
 			result = {
-				'legend': ['1', '2'],
+				'legend': legend,
 				'time': 3,
 				'recall': 90,
 				'precision': 88,

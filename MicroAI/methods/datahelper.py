@@ -42,3 +42,28 @@ def format_test_series(data, lbls):
  			})
 	
 	return series
+'''
+input : str  To check the datasets is valid.
+return : bool 
+'''
+def is_vaild(input_value):
+	input_to_list = input_value.split(',')
+	input_to_set  = set(input_to_list)
+
+	for item in input_to_set:
+		if not item.isdigit():
+			return False
+
+	return True
+
+import numpy as np
+
+def str2matrix(data, dim):
+	data_list = data.split(',')
+	data_num = [int(elm) for elm in data_list]
+	row_num = len(data_num) / dim
+	matrix =  np.array(data_num).reshape(row_num, dim)
+	return matrix
+
+def str2list(data):
+	return str2matrix(data, 1)

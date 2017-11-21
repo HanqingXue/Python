@@ -4,11 +4,9 @@ import time
 import random
 import numpy as np
 from sklearn import svm
-from scipy import interp
-import matplotlib as mpl 
+from scipy import interp 
 from sklearn import tree
 from sklearn.svm import SVC
-from datautil import DateUtil
 from sklearn import svm, datasets
 from sklearn.metrics import roc_curve, auc
 from sklearn.naive_bayes import GaussianNB
@@ -19,10 +17,10 @@ from sklearn.cross_validation import StratifiedKFold
 from sklearn.metrics import f1_score, classification_report
 from sklearn.ensemble import RandomForestClassifier, AdaBoostClassifier
 
-class algutil(object):
+class algohelper(object):
     """docstring for algutil"""
     def __init__(self):
-        super(algutil, self).__init__()
+        super(algohelper, self).__init__()
         self.algorithm = {
             "DT": tree.DecisionTreeClassifier(),
             "SVM": SVC(kernel="linear", C=0.025),
@@ -33,10 +31,11 @@ class algutil(object):
             "RF": RandomForestClassifier()
         }
     
-    def classify(self, classifierName, trainData, testData):
+    def classify(self, classifierName, train_data, trian_label, test_data):
         classifier = self.algorithm[classifierName] 
-
-
+        classifier.fit(train_data, trian_label)
+        predict_label = classifier.prediction(test_data)    
+        return predict_label
         '''
         classifier.fit(trainData["dataMartix"], trainData["labelList"])
         predictions = classifier.predict(testData["dataMartix"])
