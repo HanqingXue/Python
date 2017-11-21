@@ -30,20 +30,20 @@ class ResultHandler(tornado.web.RequestHandler):
 			test_matrix = str2matrix(result['testData'], dim)
 			train_label = str2list(result['trainLabel'])
 			
-			series = format_test_series([list(item) for item in train_matrix], [item[0] for item in train_label])
-			
+			algo = algohelper()
+			predict_res = algo.classify(algorithm, train_matrix, train_label, test_matrix)
+
+			series = format_test_series([list(item) for item in test_matrix], predict_res['label'])			
 			labels =  set([label[0] for label in train_label])
 			legend = [ str(lbl) for lbl in list(labels)]
 
-			algo = algohelper()
-			#print algo.classify(algorithm, train_matrix, train_label, test_matrix)
 			smpcnt = [train_matrix.shape[0], test_matrix.shape[0]]
 			result = {
 				'legend': legend,
-				'time': 3,
-				'recall': 90,
-				'precision': 88,
-				'fscore': 0.9,
+				'time': predict_res['time'],
+				'recall': predict_res['accuray']['recall'],
+				'precision': predict_res['accuray']['precision'],
+				'fscore': predict_res['accuray']['f1-score'],
 				'smpcnt': smpcnt,
 				'labelinfo': cnt_train_sample_size(train_label_list),
 				'series': series

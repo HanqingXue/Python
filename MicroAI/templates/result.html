@@ -147,11 +147,10 @@
         $('#algocontent').text(algorithms[algokey]);
 
         var result = JSON.parse($('#result').text());
-        $('#time').text(result['time'] + 'S');
-        $('#precision').text(result['precision'] + "%");
-        $('#recall').text(result['recall'] + "%");
+        $('#time').text(result['time'] + 'ms');
+        $('#precision').text(result['precision']*100 + "%");
+        $('#recall').text(result['recall']*100 + "%");
         $('#fscore').text(result['fscore']);
-
 
         visionData(result);
         samplePie(result['labelinfo']);

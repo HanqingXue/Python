@@ -112,10 +112,6 @@
         <button class="btn btn-embossed btn-primary col-md-12" id="submit">
           提交
         </button>
-
-        <button class="btn btn-embossed btn-primary col-md-12" id="testbtn">
-          测试
-        </button>
       </div><!--/.col-md-->
     <!-- /.container -->
     <div class="modal fade" id="testSample" tabindex="1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -215,8 +211,6 @@
       var trainSampleArray = trainSample.split("\n").toString();
       var trainlblArray = trainlbl.split("\n").toString();
       var testlblArray = testlbl.split("\n").toString();
-
-      console.log(trainSample.split("\n"));
       
       if(trainlblArray != '' && trainlblArray != '' && testlblArray != '') {
         var data  = {}
@@ -233,12 +227,6 @@
       } else {
         $(".alert").show();
       }
-    });
-  </script>
-  <script type="text/javascript">
-    $('#testbtn').click(function() {
-      var trainSample = $('#triansamp').val();
-      var arry = trainSample.split("\n");
     });
   </script>
 </html>
