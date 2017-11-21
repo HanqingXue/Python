@@ -29,6 +29,10 @@ class ResultHandler(tornado.web.RequestHandler):
 			dim = len(train_data_list) / len(train_label_list) 
 			train_matrix = str2matrix(result['trainData'], dim)
 			train_label = str2list(result['trainLabel'])
+			
+
+			series = format_test_series([list(item) for item in train_matrix], [item[0] for item in train_label])
+			print [list(item) for item in train_matrix]
 			test_matrix = str2matrix(result['testData'], dim)
 			
 			smpcnt = [train_matrix.shape[0], test_matrix.shape[0]]
@@ -39,7 +43,8 @@ class ResultHandler(tornado.web.RequestHandler):
 				'precision': 88,
 				'fscore': 0.9,
 				'smpcnt': smpcnt,
-				'labelinfo': cnt_train_sample_size(train_label_list)
+				'labelinfo': cnt_train_sample_size(train_label_list),
+				'series': series
 			}
 
 			data = json.dumps(result)
