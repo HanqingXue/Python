@@ -1,13 +1,13 @@
 #coding=utf-8
 
+import logging
 from sqlalchemy import Column, String, Integer, create_engine
-from sqlalchemy.orm import sessionmaker 
+from sqlalchemy.orm import sessionmaker, scoped_session
 from sqlalchemy.ext.declarative import declarative_base
 
 Base = declarative_base()
 
 class Employee(Base):
-	"""docstring for Employee"""
 	__tablename__ = 'employee'
 
 	first_name = Column(String(20), primary_key=True)
@@ -16,8 +16,14 @@ class Employee(Base):
 	sex = Column(String(20))
 	income = Column(Integer)
 
-if __name__ == '__main__':
+def main():
+	user_name = "root"
+	passwd = "hitxhq"
+	addr = "localhost"
+	port = "3305"
+	database = "test"
 	engine = create_engine('mysql+mysqlconnector://root:hitxhq@localhost:3305/test')
+
 	'''
 	Setup a new session
 	'''
@@ -44,3 +50,61 @@ if __name__ == '__main__':
 	pass
 	session.commit()
 	session.close()		
+
+
+class Geneinfo(Base):
+	__tablename__ = "geneinfo_ncbihgnc"
+
+	table_ID = Column(Integer, primary_key=True)
+	gene_id = Column(String(64))
+	entrez_id = Column(Integer)
+	Gene_Symbol = Column(String(32))
+	HGNC_id = Column(String(32))
+	synonyms = Column(String(64))
+	Chr =  Column(String(32))
+	chromosome_band = Column(String(32))
+	type_of_gene = Column(String(32))
+	description = Column(String(128))
+
+def test_fudan_mysql():
+	user_name = ""
+	passwd = ""
+	addr = ""
+	port = "3306"
+	database = "medicine_database"
+	engine = create_engine('mysql+mysqlconnector://{0}:{1}@{2}:{3}/{4}'.format(
+		user_name, passwd, addr, port, database))
+
+	#db_session = sessionmaker(bind=engine)
+
+	db_session  = scoped_session(sessionmaker(bind=engine,
+                        autocommit=True, autoflush=True, expire_on_commit=False))
+
+	session = db_session()
+
+	gene_info = {}
+
+	try:
+		gene = session.query(Geneinfo).filter(Geneinfo.Gene_Symbol == 'ABAT').one()
+
+
+
+		print gene
+		gene_info = {
+			'entrez': gene.entrez_id,
+			'HGNC': gene.HGNC_id,
+			'synonyms': gene.synonyms,
+			'chr':gene.hr,
+			'chromosome_band': gene.chromosome_band,
+			'type':gene.type_of_gene,
+			'description': gene.description
+		}
+
+	except Exception as ex:
+		logging.error('Error occurred: %s' % ex)
+
+	return gene_info
+	
+
+if __name__ == '__main__':
+	print test_fudan_mysql()

@@ -10,11 +10,11 @@ class MySQLOperator(object):
 		'''
 		Eestablish a connection.
 		'''
-		self.conn = MySQLdb.connect(host='localhost',
-					user='root',
-					db='test',
-					passwd='hitxhq',
-					port=3305)
+		self.conn = MySQLdb.connect(host='',
+					user='',
+					db='',
+					passwd='',
+					port=3306)
 		
 	def create_table(self):
 		try:
@@ -87,7 +87,7 @@ class MySQLOperator(object):
 		pass
 
 	def search(self):
-		sql = "SELECT * FROM EMPLOYEE"
+		sql = "SELECT * FROM geneinfo_ncbihgnc  WHERE Gene_Symbol = 'A2M'"
 
 		cursor = self.conn.cursor()
 		cursor.execute(sql)
@@ -95,6 +95,8 @@ class MySQLOperator(object):
 		try:
 			results = cursor.fetchall()
 			for row in results:
+				print row
+				'''
 				fname = row[0]
 				lname = row[1]
 				age = row[2]
@@ -103,6 +105,7 @@ class MySQLOperator(object):
 
 				print "fname=%s,lname=%s,age=%d,sex=%s,income=%d" % \
 				(fname, lname, age, sex, income )
+				'''
 
 		except Exception as e:
 			print 'Cannot fetch data!'
@@ -114,6 +117,7 @@ class MySQLOperator(object):
 
 def main():
 	db_operator = MySQLOperator()
+	'''
 	db_operator.create_table()
 	person = { 'FIRST_NAME': "Mac",
 				'LAST_NAME': "Mohan",
@@ -122,9 +126,12 @@ def main():
 				'INCOME': 2000
 	}
 	db_operator.insert(person)
+	'''
 	db_operator.search()
+	'''
 	db_operator.update()
 	db_operator.search()
+	'''
 	db_operator.close_connection()
 	pass
 if __name__ == '__main__':
