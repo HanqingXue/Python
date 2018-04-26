@@ -67,13 +67,13 @@ class Geneinfo(Base):
 	description = Column(String(128))
 
 def test_fudan_mysql():
-	user_name = ""
-	passwd = ""
-	addr = ""
+	user_name = "lijie"
+	passwd = "lijie_kb5"
+	host = "111.198.139.95"
 	port = "3306"
 	database = "medicine_database"
 	engine = create_engine('mysql+mysqlconnector://{0}:{1}@{2}:{3}/{4}'.format(
-		user_name, passwd, addr, port, database))
+		user_name, passwd, host, port, database))
 
 	#db_session = sessionmaker(bind=engine)
 
@@ -87,14 +87,11 @@ def test_fudan_mysql():
 	try:
 		gene = session.query(Geneinfo).filter(Geneinfo.Gene_Symbol == 'ABAT').one()
 
-
-
-		print gene
 		gene_info = {
 			'entrez': gene.entrez_id,
 			'HGNC': gene.HGNC_id,
 			'synonyms': gene.synonyms,
-			'chr':gene.hr,
+			'chr':gene.Chr,
 			'chromosome_band': gene.chromosome_band,
 			'type':gene.type_of_gene,
 			'description': gene.description
@@ -107,4 +104,4 @@ def test_fudan_mysql():
 	
 
 if __name__ == '__main__':
-	print test_fudan_mysql()
+	test_fudan_mysql()
